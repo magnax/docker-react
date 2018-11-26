@@ -8,3 +8,16 @@ before_install:
 
 script:
   - docker run agiled/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "docker-react"
+  env: "DockerReact-env"
+  bucket: "elasticbeanstalk-eu-central-1-818580049835"
+  bucket-path: "docker-react"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key:
+    secure: "$AWS_ACCESS_SECRET"
